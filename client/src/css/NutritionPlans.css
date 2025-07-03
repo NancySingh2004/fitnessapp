@@ -1,0 +1,119 @@
+/* NutritionPlans.css */
+
+.nutrition-container {
+  background-color: #0f0f1c;
+  color: white;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.section-card {
+  background-color: #1a1a2e;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 20px #00f2fe;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.section-card:hover {
+  box-shadow: 0 0 30px #00f2fe;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #00f2fe;
+  text-align: center;
+  text-shadow: 0 0 10px #00f2fe;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  text-align: center;
+}
+
+.stat-box {
+  background-color: #212135;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 0 10px #00f2fe88;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #cccccc;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #00f2fe;
+}
+
+.stat-remaining {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.tip-box {
+  background-color: #112031;
+  color: #00f2fe;
+  border-left: 4px solid #00f2fe;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px #00f2fe;
+}
+
+.input-field {
+  background-color: #151526;
+  color: white;
+  border: 1px solid #00f2fe;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  width: 100%;
+}
+
+.input-field:focus {
+  outline: none;
+  box-shadow: 0 0 10px #00f2fe;
+  border-color: #00f2fe;
+}
+
+.button-submit {
+  background: linear-gradient(to right, #00f2fe, #4facfe);
+  color: black;
+  font-weight: bold;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  transition: 0.3s ease;
+  box-shadow: 0 0 10px #00f2fe;
+  width: 100%;
+}
+
+.button-submit:hover {
+  background: linear-gradient(to right, #00e0ff, #70cfff);
+  box-shadow: 0 0 15px #00f2fe;
+}
+
+.meal-list li {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #2f2f4f;
+}
+
+.meal-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #00f2fe;
+}
+
+.meal-info {
+  font-size: 0.85rem;
+  color: #ccc;
+}

@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: radial-gradient(ellipse at center, #0f2027, #203a43, #2c5364);
+  color: #f0f0f0;
+}
+
+.dashboard-wrapper {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.dashboard-header h1 {
+  font-size: 2.5rem;
+  color: #00ffe0;
+  text-shadow: 0 0 10px #00ffe0;
+}
+
+.dashboard-header span {
+  color: #fff;
+}
+
+.dashboard-header p {
+  opacity: 0.85;
+}
+
+.goal-banner {
+  margin-top: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 12px 20px;
+  display: inline-block;
+  font-weight: bold;
+  color: #00ffc6;
+  box-shadow: 0 0 10px #00ffc6;
+}
+
+/* Stats Section */
+.stats-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.stat-box {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  transition: 0.3s;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.stat-box h2 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.stat-box p {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* Glow Cards */
+.glow-card {
+  box-shadow: 0 0 12px #0ff;
+}
+.glow-card.blue { box-shadow: 0 0 12px #00e0ff; }
+.glow-card.green { box-shadow: 0 0 12px #00ff8c; }
+.glow-card.pink { box-shadow: 0 0 12px #ff66cc; }
+
+/* CTA Buttons */
+.dashboard-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #111;
+  background: #00ffc6;
+  box-shadow: 0 0 10px #00ffc6;
+  transition: 0.3s;
+}
+
+.action-btn:hover {
+  transform: scale(1.05);
+  background: #03ffd5;
+}
+
+.action-btn.alt {
+  background: #ffde59;
+  box-shadow: 0 0 10px #ffde59;
+}

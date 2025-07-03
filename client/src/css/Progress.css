@@ -1,0 +1,160 @@
+/* NEON FURY THEME */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.progress-container {
+  background-color: #0f0f1b;
+  min-height: 100vh;
+  padding: 2rem;
+  color: #f0f0f0;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.progress-heading {
+  font-size: 2rem;
+  text-align: center;
+  color: #0ff;
+  text-shadow: 0 0 10px #0ff;
+  margin-bottom: 1.5rem;
+}
+
+.mark-btn {
+  display: block;
+  margin: 0 auto 2rem;
+  background-color: #10b981;
+  color: #000;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #10b981;
+}
+
+.mark-btn:hover {
+  background-color: #22d3ee;
+  box-shadow: 0 0 20px #22d3ee;
+  color: #000;
+}
+
+.chart-title {
+  font-size: 1.5rem;
+  color: #7dd3fc;
+  margin: 1rem 0;
+  text-shadow: 0 0 5px #38bdf8;
+}
+
+.chart-card {
+  background-color: #1f1f2e;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #38bdf8;
+  margin-bottom: 2rem;
+}
+
+.streaks p {
+  font-size: 1.1rem;
+  margin: 0.3rem 0;
+  color: #f472b6;
+  text-shadow: 0 0 6px #f472b6;
+}
+
+
+.color-empty {
+  fill: #2c2c3a;
+}
+
+.color-scale-1 {
+  fill: #00ffcc;
+}
+
+.color-scale-2 {
+  fill: #00ccff;
+}
+
+.color-scale-3 {
+  fill: #ff00ff;
+}
+
+.color-scale-4 {
+  fill: #ff3399;
+}
+
+
+/* Achievements */
+.achievements {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #1a1a2e;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #38bdf8;
+}
+
+.achievements h3 {
+  font-size: 1.3rem;
+  color: #0ff;
+  text-shadow: 0 0 5px #0ff;
+  margin-bottom: 0.5rem;
+}
+
+.achievements ul li {
+  margin: 0.3rem 0;
+  color: #a3e635;
+  text-shadow: 0 0 4px #bef264;
+}
+
+.heatmap-wrapper {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 10px;
+  background-color: #1a1a2e;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #00ffe7aa;
+}
+.react-calendar-heatmap text {
+  font-size: 8px;
+  fill: #ccc;
+}
+
+.react-calendar-heatmap .color-empty {
+  fill: #2d2d3a;
+}
+
+.react-calendar-heatmap .color-scale-1 {
+  fill: #00ffcc22;
+}
+
+.react-calendar-heatmap .color-scale-2 {
+  fill: #00ffcc66;
+}
+
+.react-calendar-heatmap .color-scale-3 {
+  fill: #00ffccaa;
+}
+
+.react-calendar-heatmap .color-scale-4 {
+  fill: #00ffcc;
+}
+
+.react-tooltip {
+  background-color: #111;
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  box-shadow: 0 0 5px #00ffcc88;
+}
+.pie-section {
+  margin-top: 3rem;
+  background-color: #1f1f2e;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #9333ea;
+  text-align: center;
+}
+
+.pie-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #38bdf8;
+  text-shadow: 0 0 8px #38bdf8;
+}
