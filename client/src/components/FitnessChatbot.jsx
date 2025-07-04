@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import '../css/FitnessChatbot.css';
+import { marked } from 'marked';
 
 const FitnessChatbot = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const chatEndRef = useRef(null);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -11,20 +14,75 @@ const FitnessChatbot = () => {
     const userMessage = { sender: 'You', text: input };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
+    setIsTyping(true);
 
-    const res = await fetch('http://localhost:5000/api/gemini/chat', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ message: input })
-    });
+    try {
+      const res = await fetch('http://localhost:5000/api/gemini/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: input })
+      });
 
-    const data = await res.json();
-    const botMessage = { sender: 'FitBot 🤖', text: data.reply };
+      const data = await res.json();
+      const htmlReply = marked.parse(data.reply); // Markdown to HTML
+      const botMessage = { sender: 'FitBot 🤖', text: htmlReply };
+      setMessages(prev => [...prev, botMessage]);
+    } catch (err) {
+      setMessages(prev => [
+        ...prev,
+        { sender: 'FitBot 🤖', text: 'Sorry, something went wrong.' }
+      ]);
+    }
 
-    setMessages(prev => [...prev, botMessage]);
+    setIsTyping(false);
   };
+
+  const startListening = () => {
+    if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+      alert("Sorry, your browser doesn't support Speech Recognition.");
+      return;
+    }
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.start();
+
+    recognition.onstart = () => {
+      console.log('Voice recognition started. Speak into the mic...');
+    };
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setInput(prev => (prev ? prev + ' ' + transcript : transcript));
+    };
+
+    recognition.onspeechend = () => {
+      recognition.stop();
+      console.log('Speech ended.');
+    };
+
+    recognition.onerror = (event) => {
+      console.error('Speech recognition error:', event.error);
+      if (event.error === 'no-speech') {
+        alert('No speech detected. Please try again and speak clearly.');
+      } else if (event.error === 'aborted') {
+        alert('Speech recognition aborted. Check mic permissions or try again.');
+      } else {
+        alert('Voice input error: ' + event.error);
+      }
+    };
+  };
+
+  useEffect(() => {
+    if (chatEndRef.current) {
+      chatEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, isTyping]);
 
   return (
     <div className="chatbot-container">
@@ -32,9 +90,20 @@ const FitnessChatbot = () => {
       <div className="chatbox">
         {messages.map((msg, idx) => (
           <div key={idx} className={msg.sender === 'You' ? 'user-msg' : 'bot-msg'}>
-            <strong>{msg.sender}:</strong> {msg.text}
+            <strong>{msg.sender}:</strong>{' '}
+            {msg.sender === 'You' ? (
+              msg.text
+            ) : (
+              <span dangerouslySetInnerHTML={{ __html: msg.text }} />
+            )}
           </div>
         ))}
+        {isTyping && (
+          <div className="bot-msg typing-indicator">
+            <strong>FitBot 🤖:</strong> <span className="dots">Typing</span>
+          </div>
+        )}
+        <div ref={chatEndRef} />
       </div>
       <div className="input-area">
         <input
@@ -45,6 +114,7 @@ const FitnessChatbot = () => {
           onKeyDown={e => e.key === 'Enter' && sendMessage()}
         />
         <button onClick={sendMessage}>Send</button>
+        <button onClick={startListening} title="Voice Input 🎤">🎤</button>
       </div>
     </div>
   );

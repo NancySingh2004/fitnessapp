@@ -16,7 +16,6 @@ body.dark {
   text-align: center;
   padding: 60px 20px 40px;
   background: linear-gradient(to right, #141e30, #243b55);
-  color: white;
 }
 
 .hero h1 {
@@ -128,3 +127,31 @@ body.dark {
   color: #888;
   font-family: 'Orbitron', sans-serif;
 }
+
+.feature-title {
+  background: linear-gradient(90deg, #00c9ff, #92fe9d); /* You can change this gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+.feature-title,
+.feature-desc {
+  text-decoration: none;
+}
+.features-grid a {
+  text-decoration: none;
+  color: inherit; /* Keeps the white or styled color */
+}
+.glow-title {
+  background: linear-gradient(90deg, #6a5af9, #2dcbf5, #ff79c6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+  text-shadow: none !important; /* optional, just to make sure glow is removed */
+}
+
+
+

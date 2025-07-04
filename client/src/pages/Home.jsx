@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/Home.css';
 
+
+
 const features = [
   { path: '/dashboard', title: 'DASHBOARD', emoji: '📋', desc: 'Your fitness control panel' },
   { path: '/workouts', title: 'Workout Plans', emoji: '🏋️', desc: 'View all saved workouts' },
@@ -25,7 +27,7 @@ const Home = () => {
   return (
     <div className={`home-container futuristic ${darkMode ? 'dark' : ''}`}>
       <button className="toggle-btn neon-glow" onClick={() => setDarkMode(!darkMode)}>
-        {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+        {darkMode ? '☀️' : '🌙'}
       </button>
 
       <div className="hero neon-border">
