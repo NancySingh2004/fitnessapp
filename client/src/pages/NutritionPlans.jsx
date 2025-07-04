@@ -13,11 +13,13 @@ const NutritionPlans = () => {
   const [mealProtein, setMealProtein] = useState('');
   const [mealCarbs, setMealCarbs] = useState('');
   const [mealFat, setMealFat] = useState('');
+  const API_BASE = process.env.REACT_APP_API_BASE_URL;
+
 
   const fetchDailySummary = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/nutrition/daily-summary/${userId}`);
+      const res = await fetch(`${API_BASE}/api/nutrition/daily-summary/${userId}`);
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const data = await res.json();
       setDailySummary(data);
@@ -47,7 +49,7 @@ const NutritionPlans = () => {
     };
 
     try {
-      const res = await fetch('http://localhost:5000/api/nutrition/log-meal', {
+      const res = await fetch(`${API_BASE}/api/nutrition/log-meal`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(mealData),

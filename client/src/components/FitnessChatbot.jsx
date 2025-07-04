@@ -8,6 +8,8 @@ const FitnessChatbot = () => {
   const [isTyping, setIsTyping] = useState(false);
   const chatEndRef = useRef(null);
 
+  const API_BASE = process.env.REACT_APP_API_BASE_URL;
+
   const sendMessage = async () => {
     if (!input.trim()) return;
 
@@ -17,20 +19,20 @@ const FitnessChatbot = () => {
     setIsTyping(true);
 
     try {
-      const res = await fetch('http://localhost:5000/api/gemini/chat', {
+      const res = await fetch(`${API_BASE}/api/gemini/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: input })
       });
 
       const data = await res.json();
-      const htmlReply = marked.parse(data.reply); // Markdown to HTML
+      const htmlReply = marked.parse(data.reply);
       const botMessage = { sender: 'FitBot 🤖', text: htmlReply };
       setMessages(prev => [...prev, botMessage]);
     } catch (err) {
       setMessages(prev => [
         ...prev,
-        { sender: 'FitBot 🤖', text: 'Sorry, something went wrong.' }
+        { sender: 'FitBot 🤖', text: '❌ Sorry, something went wrong.' }
       ]);
     }
 
@@ -39,7 +41,7 @@ const FitnessChatbot = () => {
 
   const startListening = () => {
     if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
-      alert("Sorry, your browser doesn't support Speech Recognition.");
+      alert("❗ Your browser doesn't support Speech Recognition.");
       return;
     }
 
@@ -52,29 +54,13 @@ const FitnessChatbot = () => {
 
     recognition.start();
 
-    recognition.onstart = () => {
-      console.log('Voice recognition started. Speak into the mic...');
-    };
-
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
       setInput(prev => (prev ? prev + ' ' + transcript : transcript));
     };
 
-    recognition.onspeechend = () => {
-      recognition.stop();
-      console.log('Speech ended.');
-    };
-
     recognition.onerror = (event) => {
-      console.error('Speech recognition error:', event.error);
-      if (event.error === 'no-speech') {
-        alert('No speech detected. Please try again and speak clearly.');
-      } else if (event.error === 'aborted') {
-        alert('Speech recognition aborted. Check mic permissions or try again.');
-      } else {
-        alert('Voice input error: ' + event.error);
-      }
+      alert(`Voice input error: ${event.error}`);
     };
   };
 
@@ -86,7 +72,8 @@ const FitnessChatbot = () => {
 
   return (
     <div className="chatbot-container">
-      <h2>💬 Fitness Chatbot</h2>
+      <h2 className="chatbot-title">💬 Fitness Chatbot</h2>
+
       <div className="chatbox">
         {messages.map((msg, idx) => (
           <div key={idx} className={msg.sender === 'You' ? 'user-msg' : 'bot-msg'}>
@@ -98,13 +85,15 @@ const FitnessChatbot = () => {
             )}
           </div>
         ))}
+
         {isTyping && (
           <div className="bot-msg typing-indicator">
-            <strong>FitBot 🤖:</strong> <span className="dots">Typing</span>
+            <strong>FitBot 🤖:</strong> <span className="dots">Typing...</span>
           </div>
         )}
         <div ref={chatEndRef} />
       </div>
+
       <div className="input-area">
         <input
           type="text"

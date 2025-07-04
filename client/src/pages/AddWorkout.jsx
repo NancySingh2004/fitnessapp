@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../css/AddWorkout.css'; // Don't forget to create this CSS file
+import '../css/AddWorkout.css';
 
 const AddWorkout = () => {
   const [workout, setWorkout] = useState({
@@ -10,6 +10,8 @@ const AddWorkout = () => {
     description: '',
     exercises: [{ name: '', reps: '', videoURL: '' }]
   });
+
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
   const handleChange = (e) => {
     setWorkout({ ...workout, [e.target.name]: e.target.value });
@@ -32,7 +34,7 @@ const AddWorkout = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch('http://localhost:5000/api/workouts', {
+      const res = await fetch(`${baseUrl}/api/workouts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

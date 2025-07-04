@@ -6,12 +6,14 @@ const DailySummary = () => {
   const [workouts, setWorkouts] = useState([]);
   const today = new Date().toISOString().split('T')[0];
 
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
+
   useEffect(() => {
     const token = localStorage.getItem('token');
 
     const fetchMeals = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/meallog', {
+        const res = await fetch(`${baseUrl}/api/meallog`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -24,7 +26,7 @@ const DailySummary = () => {
 
     const fetchWorkouts = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/progress', {
+        const res = await fetch(`${baseUrl}/api/progress`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -37,10 +39,10 @@ const DailySummary = () => {
 
     fetchMeals();
     fetchWorkouts();
-  }, []);
+  }, [baseUrl, today]);
 
   const totalCaloriesEaten = mealLogs.reduce((sum, meal) => sum + meal.calories, 0);
-  const totalCaloriesBurned = workouts.length * 200; // example assumption
+  const totalCaloriesBurned = workouts.length * 200;
   const netCalories = totalCaloriesEaten - totalCaloriesBurned;
 
   return (

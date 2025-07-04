@@ -8,6 +8,7 @@ const RingTracker = () => {
   const [steps, setSteps] = useState(0);
   const [heartData, setHeartData] = useState([]);
   const [sleepHours, setSleepHours] = useState(0);
+  const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,8 +21,9 @@ const RingTracker = () => {
 
   const handleSubmit = async () => {
     const token = localStorage.getItem('token');
+    if (!token) return alert('⚠️ You must be logged in to submit data.');
     try {
-      await fetch('http://localhost:5000/api/ring', {
+      await fetch(`${API_BASE}/api/ring`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -55,8 +57,9 @@ const RingTracker = () => {
 
   const saveHeartRate = async (bpm) => {
     const token = localStorage.getItem('token');
+    if (!token) return;
     try {
-      await fetch('http://localhost:5000/api/heart', {
+      await fetch(`${API_BASE}/api/heart`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

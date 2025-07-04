@@ -13,10 +13,11 @@ const Progress = () => {
   const [progress, setProgress] = useState([]);
   const [marked, setMarked] = useState(false);
   const today = new Date().toISOString().split('T')[0];
+  const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
   const fetchProgress = async () => {
     const token = localStorage.getItem('token');
-    const res = await fetch('http://localhost:5000/api/progress', {
+    const res = await fetch(`${API_BASE}/api/progress`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     const data = await res.json();
@@ -26,7 +27,7 @@ const Progress = () => {
 
   const markToday = async () => {
     const token = localStorage.getItem('token');
-    const res = await fetch('http://localhost:5000/api/progress/complete', {
+    const res = await fetch(`${API_BASE}/api/progress/complete`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -38,6 +39,9 @@ const Progress = () => {
     alert(data.message || data.error);
     fetchProgress();
   };
+
+  // Rest of your component remains unchanged...
+
 
   useEffect(() => {
     fetchProgress();

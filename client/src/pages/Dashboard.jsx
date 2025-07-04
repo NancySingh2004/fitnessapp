@@ -3,13 +3,14 @@ import '../css/Dashboard.css';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
   const getProfile = async () => {
     const token = localStorage.getItem('token');
     if (!token) return;
 
     try {
-      const res = await fetch('http://localhost:5000/api/auth/profile', {
+      const res = await fetch(`${baseUrl}/api/auth/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
