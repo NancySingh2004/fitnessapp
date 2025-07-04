@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../css/Register.css'; // 👈 custom styles here
+import '../css/Register.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -9,14 +9,16 @@ const Register = () => {
     goal: ''
   });
 
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
+
   const handleChange = (e) => {
-    setFormData({...formData, [e.target.name]: e.target.value});
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/auth/register', {
+      const res = await fetch(`${baseUrl}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
